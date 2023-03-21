@@ -1,34 +1,17 @@
 package 모의고사2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 class Solution2 {
 
-	// 공식을 통해 겹친는 교점("*")을 찾는다.
-	// 교점에서 가장 멀리 떨어진(max) 두 곳(x, y)을 찾아 그림(".")을 그린다.
-	// 그림에서 겹치는 부위(점)을 "*"로 치환한다.
-
-	public static void main(String[] args) {
-
-		int[][] line = 	new int[][] {
-			{2, -1, 4}, {-2, -1, 4}, {0, -1, 1}, {5, -8, -12}, {5, 8, 12}
-		};
-
-		int[][] line2 = 	new int[][] {
-			{0, 1, -1}, {1, 0, -1}, {1, 0, 1}
-		};
-
-		int[][] line3 = 	new int[][] {
-			{0,0,0}, {0,0,0}
-		};
-
-		Solution2 test = new Solution2();
-		String[] result = test.solution(line3);
-
-		Arrays.stream(result).forEach(System.out::println);
-	}
+	/*
+     공식을 통해 겹친는 교점("*")을 찾는다.
+	 - 교점이 없다면(0,0 -> "*") 리턴
+     가장 멀리떨어진 네 곳(maxX, minX, maxY, minY)을 찾는다.
+     min -> max로 순회하면서
+     교점을 체크하면서 교점이 있다면 "*", 없다면 "."을 문자열에 추가한다.
+	*/
 
 	public String[] solution(int[][] line) {
 
@@ -49,7 +32,7 @@ class Solution2 {
 				int D = lines[j][1];
 				int F = lines[j][2];
 
-				if (A*D - B*C == 0) {
+				if (((A*D) - (B*C)) == 0) {
 					continue;
 				}
 
@@ -74,6 +57,10 @@ class Solution2 {
 	}
 
 	private String[] drwaIntersectionPointInGrid(int[][] points) {
+
+		if (points.length == 0) {
+			return new String[]{"*"};
+		}
 
 		int maxX = points[0][0];
 		int minX = points[0][0];
